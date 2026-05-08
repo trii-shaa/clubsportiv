@@ -1,0 +1,5 @@
+package com.practica.enums;
+
+public enum TipAbonament {
+    BASIC, FULL_PASS, YOGA_ZEN, COMBAT_MIX, AQUA_SPORT, PERSONAL_VIP, STUDENT_FIX, FAMILY_PACK, WEEKEND_ONLY, ANUAL_PRO;
+}
