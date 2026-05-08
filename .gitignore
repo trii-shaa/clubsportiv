@@ -1,0 +1,24 @@
+.vscode/
+# Maven - Folderul de build
+target/
+
+# IDE - Visual Studio Code
+.vscode/
+
+# IDE - IntelliJ
+.idea/
+*.iml
+
+# IDE - Eclipse
+.settings/
+.bin/
+.classpath
+.project
+
+# Log-uri și fișiere temporare
+*.log
+.DS_Store
+
+# Ignoră fișierele exportate la runtime
+*.csv
+*.txt
