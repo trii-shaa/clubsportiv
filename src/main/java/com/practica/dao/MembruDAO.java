@@ -1,8 +1,6 @@
 package com.practica.dao;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 
 import com.practica.model.Membru;
