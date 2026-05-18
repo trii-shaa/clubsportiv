@@ -22,6 +22,9 @@ public class Abonament {
     public double getPret() {
         return pret;
     }
+    public String getDenumireAbonament() {
+        return this.tipAbonament != null ? this.tipAbonament.getNumeAfisare() : "Fără Abonament";
+    }
 
     //Setteri
     public void setIdAbonament(int idAbonament) {

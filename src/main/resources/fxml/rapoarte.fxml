@@ -1,0 +1,80 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane style="-fx-background-color: #f0f4f8;" fx:controller="com.clubsportiv.controller.RapoarteController">
+<top>
+<HBox style="-fx-background-color: #2c3e50; -fx-padding: 12 20;" alignment="CENTER_LEFT">
+<Label text="📊 Rapoarte" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: white;"/>
+</HBox>
+</top>
+<center>
+<TabPane tabClosingPolicy="UNAVAILABLE" style="-fx-padding: 10;">
+<!--
+ ===================== RAPORT 1 ===================== 
+-->
+<Tab text="🏆 Antrenori peste medie">
+<VBox spacing="12" style="-fx-padding: 20;">
+<Label text="Antrenori cu salariul peste media clubului" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+<TableView fx:id="tableAntrenori" VBox.vgrow="ALWAYS" prefHeight="350">
+<columns>
+<TableColumn fx:id="colA_Nume" text="Nume" prefWidth="180"/>
+<TableColumn fx:id="colA_Prenume" text="Prenume" prefWidth="180"/>
+<TableColumn fx:id="colA_Salariu" text="Salariu (MDL)" prefWidth="150"/>
+</columns>
+<placeholder>
+<Label text="Nu exista date." style="-fx-text-fill: #95a5a6;"/>
+</placeholder>
+</TableView>
+<HBox spacing="10">
+<Button text="🔄 Reincarca" onAction="#incarcaRaport1" style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 7 15;"/>
+<Button text="📥 Exporta CSV / TXT" onAction="#exportRaport1" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 7 15;"/>
+</HBox>
+</VBox>
+</Tab>
+<!--
+ ===================== RAPORT 2 ===================== 
+-->
+<Tab text="👥 Membri per sectie">
+<VBox spacing="12" style="-fx-padding: 20;">
+<Label text="Numarul de membri inscrisi in fiecare sectie" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+<TableView fx:id="tableMembri" VBox.vgrow="ALWAYS" prefHeight="350">
+<columns>
+<TableColumn fx:id="colM_Sectie" text="Sectie" prefWidth="280"/>
+<TableColumn fx:id="colM_NrMembri" text="Nr. Membri" prefWidth="150"/>
+</columns>
+<placeholder>
+<Label text="Nu exista date." style="-fx-text-fill: #95a5a6;"/>
+</placeholder>
+</TableView>
+<HBox spacing="10">
+<Button text="🔄 Reincarca" onAction="#incarcaRaport2" style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 7 15;"/>
+<Button text="📥 Exporta CSV / TXT" onAction="#exportRaport2" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 7 15;"/>
+</HBox>
+</VBox>
+</Tab>
+<!--
+ ===================== RAPORT 3 ===================== 
+-->
+<Tab text="📅 Sedinte ultima saptamana">
+<VBox spacing="12" style="-fx-padding: 20;">
+<Label text="Sedintele desfasurate in ultimele 7 zile" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+<TableView fx:id="tableSedinte" VBox.vgrow="ALWAYS" prefHeight="350">
+<columns>
+<TableColumn fx:id="colS_Id" text="ID" prefWidth="60"/>
+<TableColumn fx:id="colS_Data" text="Data" prefWidth="120"/>
+<TableColumn fx:id="colS_Ora" text="Ora" prefWidth="100"/>
+<TableColumn fx:id="colS_Membru" text="Membru" prefWidth="160"/>
+<TableColumn fx:id="colS_Antrenor" text="Antrenor" prefWidth="160"/>
+</columns>
+<placeholder>
+<Label text="Nu exista sedinte in ultima saptamana." style="-fx-text-fill: #95a5a6;"/>
+</placeholder>
+</TableView>
+<HBox spacing="10">
+<Button text="🔄 Reincarca" onAction="#incarcaRaport3" style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 7 15;"/>
+<Button text="📥 Exporta CSV / TXT" onAction="#exportRaport3" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 7 15;"/>
+</HBox>
+</VBox>
+</Tab>
+</TabPane>
+</center>
+</BorderPane>

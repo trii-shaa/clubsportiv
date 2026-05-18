@@ -1,17 +1,20 @@
 package com.practica.model;
 
+import com.practica.enums.TipSectie;
+
 public class Membru {
     private int idMembru;
     private String nume;
     private String prenume;
     private int varsta;
     private String email;
-    private int telefon;
+    private String telefon;
     private int idSectie;
+    private TipSectie tipSectie;
     private Integer idAntrenor;
     private int idAbonament;
 
-    public Membru(int idMembru, String nume, String prenume, int varsta, String email, int telefon, int idSectie, int idAntrenor, int idAbonament) {
+    public Membru(int idMembru, String nume, String prenume, int varsta, String email, String telefon, int idSectie, int idAntrenor, int idAbonament) {
         this.idMembru = idMembru;
         this.nume = nume;
         this.prenume = prenume;
@@ -39,7 +42,7 @@ public class Membru {
     public String getEmailMembru(){
         return email;
     }
-    public int getTelefonMembru() {
+    public String getTelefonMembru() {
         return telefon;
     }
     public int getIdSectie() {
@@ -50,6 +53,10 @@ public class Membru {
     }
     public int getIdAbonament() {
         return idAbonament;
+    }
+
+    public String getNumeSectie() {
+    return this.tipSectie != null ? this.tipSectie.getNumeAfisare() : "Fără secție";
     }
 
     //Setteri
@@ -68,7 +75,7 @@ public class Membru {
     public void setEmailMembru(String email){
         this.email = email;
     }
-    public void setTelefonMembru(int telefon) {
+    public void setTelefonMembru(String telefon) {
         this.telefon = telefon;
     }
     public void setIdSectie(int idSectie) {

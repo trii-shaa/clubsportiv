@@ -87,4 +87,9 @@ public class SedintaDAO extends BaseDAO<Sedinta> {
         }
         return null;
     }
+
+    public List<Sedinta> getByMembru(int idMembru) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getByMembru'");
+    }
 }

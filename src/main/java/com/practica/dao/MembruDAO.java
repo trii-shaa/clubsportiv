@@ -17,7 +17,7 @@ public class MembruDAO extends BaseDAO<Membru> {
      stmt.setString(2, m.getPrenumeMembru());
      stmt.setInt(3, m.getVarsta());
      stmt.setString(4, m.getEmailMembru());
-     stmt.setInt(5, m.getTelefonMembru());  
+     stmt.setString(5, m.getTelefonMembru());  
       stmt.setInt(6, m.getIdSectie());
       stmt.setInt(7, m.getIdAntrenor());
       stmt.setInt(8, m.getIdAbonament());
@@ -33,7 +33,7 @@ public class MembruDAO extends BaseDAO<Membru> {
         stmt.setString(2, m.getPrenumeMembru());
         stmt.setInt(3, m.getVarsta());
         stmt.setString(4, m.getEmailMembru());
-        stmt.setInt(5, m.getTelefonMembru());
+        stmt.setString(5, m.getTelefonMembru());
         stmt.setInt(6, m.getIdSectie());
         stmt.setInt(7, m.getIdAntrenor());
         stmt.setInt(8, m.getIdAbonament());
@@ -60,7 +60,7 @@ public class MembruDAO extends BaseDAO<Membru> {
                 rs.getString("Prenume"),
                 rs.getInt("Varsta"),
                 rs.getString("Email"),
-                rs.getInt("Telefon"),
+                rs.getString("Telefon"),
                 rs.getInt("ID_Sectie"),
                 rs.getObject("ID_Antrenor") != null ? rs.getInt("ID_Antrenor") : null,
                 rs.getInt("ID_Abonament")
@@ -69,12 +69,12 @@ public class MembruDAO extends BaseDAO<Membru> {
         return lista;
     }
 
-        public List<Membru> cautaDupaNume(String nume) throws SQLException {
+        public List<Membru> cautaDupaNume(int idMembru) throws SQLException {
         List<Membru> lista = new ArrayList<>();
         PreparedStatement ps = connection.prepareStatement(
             "SELECT * FROM Membri WHERE Nume LIKE ?"
         );
-        ps.setString(1, "%" + nume + "%");
+        ps.setString(1, "%" + idMembru + "%");
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             lista.add(new Membru(
@@ -83,7 +83,7 @@ public class MembruDAO extends BaseDAO<Membru> {
                 rs.getString("Prenume"),
                 rs.getInt("Varsta"),
                 rs.getString("Email"),
-                rs.getInt("Telefon"),
+                rs.getString("Telefon"),
                 rs.getInt("ID_Sectie"),
                 rs.getObject("ID_Antrenor") != null ? rs.getInt("ID_Antrenor") : null,
                 rs.getInt("ID_Abonament")
@@ -91,5 +91,32 @@ public class MembruDAO extends BaseDAO<Membru> {
         }
         return lista;
     }
+    public Membru cautaDupaId(int idMembru) throws SQLException {
+    PreparedStatement ps = connection.prepareStatement(
+        "SELECT * FROM Membri WHERE ID_Membru = ?"
+    );
+    ps.setInt(1, idMembru);
+    ResultSet rs = ps.executeQuery();
+    
+    if (rs.next()) {
+        return new Membru(
+            rs.getInt("ID_Membru"),
+            rs.getString("Nume"),
+            rs.getString("Prenume"),
+            rs.getInt("Varsta"),
+            rs.getString("Email"),
+            rs.getString("Telefon"),
+            rs.getInt("ID_Sectie"),
+            rs.getObject("ID_Antrenor") != null ? rs.getInt("ID_Antrenor") : null,
+            rs.getInt("ID_Abonament")
+        );
+    }
+    return null; 
+}
+
+        public void updateDatePersonale(int idMembru, String email, String telefon) {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'updateDatePersonale'");
+        }
 
 }

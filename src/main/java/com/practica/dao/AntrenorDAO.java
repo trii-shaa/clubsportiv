@@ -17,7 +17,7 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
             stmt.setString(2, antrenor.getNumeAntrenor());
             stmt.setString(3, antrenor.getPrenumeAntrenor());
             stmt.setString(4, antrenor.getEmailAntrenor());
-            stmt.setInt(5, antrenor.getTelefonAntrenor());
+            stmt.setString(5, antrenor.getTelefonAntrenor());
             stmt.setInt(6, antrenor.getIdSectie());
             stmt.setDouble(7, antrenor.getSalariu());
             stmt.executeUpdate();
@@ -36,7 +36,7 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
                     rs.getString("nume"),
                     rs.getString("prenume"),
                     rs.getString("email"),
-                    rs.getInt("telefon"),
+                    rs.getString("telefon"),
                     rs.getInt("idSectie"),
                     rs.getDouble("salariu")
                 );
@@ -54,7 +54,7 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
             stmt.setString(2, antrenor.getNumeAntrenor());
             stmt.setString(3, antrenor.getPrenumeAntrenor());
             stmt.setString(4, antrenor.getEmailAntrenor());
-            stmt.setInt(5, antrenor.getTelefonAntrenor());
+            stmt.setString(5, antrenor.getTelefonAntrenor());
             stmt.setInt(6, antrenor.getIdSectie());
             stmt.setDouble(7, antrenor.getSalariu());
             stmt.executeUpdate();
@@ -81,7 +81,7 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
                         rs.getString("nume"),
                         rs.getString("prenume"),
                         rs.getString("email"),
-                        rs.getInt("telefon"),
+                        rs.getString("telefon"),
                         rs.getInt("idSectie"),
                         rs.getDouble("salariu")
                     );

@@ -4,10 +4,10 @@ public class Antrenor {
     private String numeAntrenor;
     private String prenumeAntrenor;
     private String emailAntrenor;
-    private int telefonAntrenor;
+    private String telefonAntrenor;
     private int idSectie;
     private double salariu;
-    public Antrenor(int idAntrenor, String numeAntrenor, String prenumeAntrenor, String emailAntrenor, int telefonAntrenor, int idSectie, double salariu) {
+    public Antrenor(int idAntrenor, String numeAntrenor, String prenumeAntrenor, String emailAntrenor, String telefonAntrenor, int idSectie, double salariu) {
         this.idAntrenor = idAntrenor;
         this.numeAntrenor = numeAntrenor;
         this.prenumeAntrenor = prenumeAntrenor;
@@ -30,7 +30,7 @@ public class Antrenor {
     public String getEmailAntrenor() {
         return emailAntrenor; 
     }
-    public int getTelefonAntrenor() {
+    public String getTelefonAntrenor() {
         return telefonAntrenor;
     }   
     public int getIdSectie() {
@@ -53,7 +53,7 @@ public class Antrenor {
     public void setEmailAntrenor(String emailAntrenor) {
         this.emailAntrenor = emailAntrenor; 
     }
-    public void setTelefonAntrenor(int telefonAntrenor) {
+    public void setTelefonAntrenor(String telefonAntrenor) {
         this.telefonAntrenor = telefonAntrenor;
     }
     public void setIdSectie(int idSectie) {

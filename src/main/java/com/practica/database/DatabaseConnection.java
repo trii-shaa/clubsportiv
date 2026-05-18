@@ -11,7 +11,7 @@ public class DatabaseConnection {
         if (connection == null || connection.isClosed()) {
             try {
                 connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/ClubSportiv", "root", "parola"
+                    "jdbc:mysql://localhost:3306/ClubSportiv", "root", "1485"
                 );
             } catch (SQLException e) {
                 throw new SQLException("Eroare la conectarea la baza de date: " + e.getMessage());
