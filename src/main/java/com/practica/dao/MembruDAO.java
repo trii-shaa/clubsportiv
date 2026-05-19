@@ -69,29 +69,30 @@ public class MembruDAO extends BaseDAO<Membru> {
         return lista;
     }
 
-        public List<Membru> cautaDupaNume(int idMembru) throws SQLException {
+    public List<Membru> cautaDupaNume(String nume) throws SQLException {
         List<Membru> lista = new ArrayList<>();
-        PreparedStatement ps = connection.prepareStatement(
-            "SELECT * FROM Membri WHERE Nume LIKE ?"
-        );
-        ps.setString(1, "%" + idMembru + "%");
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            lista.add(new Membru(
-                rs.getInt("ID_Membru"),
-                rs.getString("Nume"),
-                rs.getString("Prenume"),
-                rs.getInt("Varsta"),
-                rs.getString("Email"),
-                rs.getString("Telefon"),
-                rs.getInt("ID_Sectie"),
-                rs.getObject("ID_Antrenor") != null ? rs.getInt("ID_Antrenor") : null,
-                rs.getInt("ID_Abonament")
-            ));
+        String sql = "SELECT * FROM membru WHERE nume LIKE ?"; // Corectat numele tabelului din Membri în membru
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, "%" + nume + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(new Membru(
+                        rs.getInt("ID_Membru"),
+                        rs.getString("Nume"),
+                        rs.getString("Prenume"),
+                        rs.getInt("Varsta"),
+                        rs.getString("Email"),
+                        rs.getString("Telefon"),
+                        rs.getInt("ID_Sectie"),
+                        rs.getObject("ID_Antrenor") != null ? rs.getInt("ID_Antrenor") : null,
+                        rs.getInt("ID_Abonament")
+                    ));
+                }
+            }
         }
         return lista;
     }
-    
+
     public Membru cautaDupaId(int idMembru) throws SQLException {
     PreparedStatement ps = connection.prepareStatement(
         "SELECT * FROM Membri WHERE ID_Membru = ?"
@@ -115,9 +116,13 @@ public class MembruDAO extends BaseDAO<Membru> {
     return null; 
 }
 
-        public void updateDatePersonale(int idMembru, String email, String telefon) {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'updateDatePersonale'");
+public void updateDatePersonale(int idMembru, String email, String telefon) throws SQLException {
+        String sql = "UPDATE membru SET email = ?, telefon = ? WHERE idMembru = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            stmt.setString(2, telefon);
+            stmt.setInt(3, idMembru);
+            stmt.executeUpdate();
         }
-
+    }
 }

@@ -48,18 +48,24 @@ public class Validator {
         }
     }
 
-    public static void validareCampGol(String text, String string) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'validareCampGol'");
+   public static void validareCampGol(String text, String numeCamp) throws IllegalArgumentException {
+        if (text == null || text.trim().isEmpty()) {
+            throw new IllegalArgumentException("Câmpul '" + numeCamp + "' nu poate fi gol!");
+        }
     }
 
-    public static void validareDataExpirare(LocalDate value, LocalDate value2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'validareDataExpirare'");
+    public static void validareDataExpirare(LocalDate dataInceput, LocalDate dataExpirare) throws IllegalArgumentException {
+        if (dataInceput == null || dataExpirare == null) {
+            throw new IllegalArgumentException("Ambele date trebuie să fie valide!");
+        }
+        if (dataExpirare.isBefore(dataInceput)) {
+            throw new IllegalArgumentException("Data de expirare nu poate fi înainte de data de început!");
+        }
     }
 
-    public static void validareSalariu(double salariu) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'validareSalariu'");
+    public static void validareSalariu(double salariu) throws IllegalArgumentException {
+        if (salariu <= 0) {
+            throw new IllegalArgumentException("Salariul trebuie să fie mai mare decât 0!");
+        }
     }
 }

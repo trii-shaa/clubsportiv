@@ -41,10 +41,5 @@ public class ExportService implements Exportabil {
             writer.newLine();
         }
     }
-
-    @Override
-    public void exportCVS(String filePath, List<?> date) throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exportCVS'");
-    }
 }
+
