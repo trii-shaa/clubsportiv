@@ -1,48 +1,71 @@
 package com.practica.model;
 
 import com.practica.enums.TipAbonament;
+
+import java.time.LocalDate;
+
 public class Abonament {
     private int idAbonament;
-    private TipAbonament tipAbonament;
+    private String denumire;
+    private String descriere;
+    private LocalDate dataInceput;
+    private LocalDate dataExpirarii;
     private double pret;
 
-    public Abonament(int idAbonament, TipAbonament tipAbonament, double pret) {
+    public Abonament(int idAbonament, String denumire, String descriere,
+                     LocalDate dataInceput, LocalDate dataExpirarii, double pret) {
         this.idAbonament = idAbonament;
-        this.tipAbonament = tipAbonament;
+        this.denumire = denumire;
+        this.descriere = descriere;
+        this.dataInceput = dataInceput;
+        this.dataExpirarii = dataExpirarii;
         this.pret = pret;
     }
 
-    //Getteri
-    public int getIdAbonament() {
+    //getteri
+    public int getIdAbonament() { 
         return idAbonament;
+     }
+    public String getDenumire() {
+         return denumire; 
     }
-    public TipAbonament getTipAbonament() {
-        return tipAbonament;
+    public String getDescriere() {
+         return descriere; 
+    }
+    public LocalDate getDataInceput() {
+         return dataInceput; 
+    }
+    public LocalDate getDataExpirarii() {
+         return dataExpirarii; 
     }
     public double getPret() {
-        return pret;
-    }
-    public String getDenumireAbonament() {
-        return this.tipAbonament != null ? this.tipAbonament.getNumeAfisare() : "Fără Abonament";
+         return pret; 
     }
 
-    //Setteri
-    public void setIdAbonament(int idAbonament) {
-        this.idAbonament = idAbonament; 
+    //setteri
+    public void setDenumire(String denumire) {
+         this.denumire = denumire; 
     }
-    public void setTipAbonament(TipAbonament tipAbonament) {
-        this.tipAbonament = tipAbonament; 
+    public void setDescriere(String descriere) {
+         this.descriere = descriere; 
+    }
+    public void setDataInceput(LocalDate dataInceput) {
+         this.dataInceput = dataInceput; 
+    }
+    public void setDataExpirarii(LocalDate dataExpirarii) {
+         this.dataExpirarii = dataExpirarii; 
     }
     public void setPret(double pret) {
-        this.pret = pret; 
+         this.pret = pret; 
+        }
+
+    public TipAbonament getTipAbonament() {
+        return TipAbonament.fromDenumire(denumire);
     }
 
     @Override
-    public String toString(){
-        return "Abonament{" +
-                "idAbonament=" + idAbonament +
-                ", tipAbonament=" + tipAbonament +
-                ", pret=" + pret +
-                '}';
+    public String toString() {
+        return idAbonament + "," + denumire + "," + descriere + ","
+             + dataInceput + "," + dataExpirarii + "," + pret;
     }
 }

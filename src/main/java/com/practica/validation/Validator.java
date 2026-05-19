@@ -47,4 +47,14 @@ public class Validator {
             throw new IllegalArgumentException("Numarul de telefon trebuie sa se inceapă dupa exemplul: 06****** sau 07******!");
         }
     }
+
+    public static void validareCampGol(String text, String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'validareCampGol'");
+    }
+
+    public static void validareDataExpirare(LocalDate value, LocalDate value2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'validareDataExpirare'");
+    }
 }

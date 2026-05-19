@@ -91,6 +91,7 @@ public class MembruDAO extends BaseDAO<Membru> {
         }
         return lista;
     }
+    
     public Membru cautaDupaId(int idMembru) throws SQLException {
     PreparedStatement ps = connection.prepareStatement(
         "SELECT * FROM Membri WHERE ID_Membru = ?"
