@@ -1,4 +1,5 @@
 package com.practica.model;
+
 public class Antrenor {
     private int idAntrenor;
     private String numeAntrenor;
@@ -7,6 +8,7 @@ public class Antrenor {
     private String telefonAntrenor;
     private int idSectie;
     private double salariu;
+    
     public Antrenor(int idAntrenor, String numeAntrenor, String prenumeAntrenor, String emailAntrenor, String telefonAntrenor, int idSectie, double salariu) {
         this.idAntrenor = idAntrenor;
         this.numeAntrenor = numeAntrenor;
@@ -17,7 +19,7 @@ public class Antrenor {
         this.salariu = salariu;
     }
 
-    //Getteri
+    // Getteri
     public int getIdAntrenor() {
         return idAntrenor; 
     }
@@ -33,14 +35,14 @@ public class Antrenor {
     public String getTelefonAntrenor() {
         return telefonAntrenor;
     }   
-    public int getIdSectie() {
+    public int getIdSectie() { // CORECTAT: returnează int, nu TipSectie
         return idSectie; 
     }
     public double getSalariu() {
         return salariu;
     }
 
-    //Setteri
+    // Setteri
     public void setIdAntrenor(int idAntrenor) {
         this.idAntrenor = idAntrenor;
     }
@@ -70,7 +72,7 @@ public class Antrenor {
                 ", numeAntrenor='" + numeAntrenor + '\'' +
                 ", prenumeAntrenor='" + prenumeAntrenor + '\'' +
                 ", emailAntrenor='" + emailAntrenor + '\'' +
-                ", telefonAntrenor=" + telefonAntrenor +
+                ", telefonAntrenor='" + telefonAntrenor + '\'' +
                 ", idSectie=" + idSectie +
                 ", salariu=" + salariu +
                 '}';

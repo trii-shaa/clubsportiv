@@ -2,8 +2,8 @@ package com.practica.dao;
 
 import java.sql.*;
 import java.util.*;
-
 import com.practica.model.Antrenor;
+
 public class AntrenorDAO extends BaseDAO<Antrenor> {
     public AntrenorDAO() throws SQLException {
         super();
@@ -11,7 +11,8 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
 
     @Override
     public void add(Antrenor antrenor) throws SQLException {
-        String sql = "INSERT INTO antrenori (nume, prenume, sectie) VALUES (?, ?, ?)";
+        // CORECTAT: Adăugate toate coloanele corespunzătoare celor 7 parametri
+        String sql = "INSERT INTO antrenori (idAntrenor, nume, prenume, email, telefon, idSectie, salariu) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, antrenor.getIdAntrenor());
             stmt.setString(2, antrenor.getNumeAntrenor());
@@ -48,15 +49,16 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
 
     @Override
     public void update(Antrenor antrenor) throws SQLException {
-        String sql = "UPDATE antrenori SET nume = ?, prenume = ?, sectie = ? WHERE idAntrenor = ?";
+        // CORECTAT: S-a rescris query-ul corect pentru UPDATE
+        String sql = "UPDATE antrenori SET nume = ?, prenume = ?, email = ?, telefon = ?, idSectie = ?, salariu = ? WHERE idAntrenor = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-             stmt.setInt(1, antrenor.getIdAntrenor());
-            stmt.setString(2, antrenor.getNumeAntrenor());
-            stmt.setString(3, antrenor.getPrenumeAntrenor());
-            stmt.setString(4, antrenor.getEmailAntrenor());
-            stmt.setString(5, antrenor.getTelefonAntrenor());
-            stmt.setInt(6, antrenor.getIdSectie());
-            stmt.setDouble(7, antrenor.getSalariu());
+            stmt.setString(1, antrenor.getNumeAntrenor());
+            stmt.setString(2, antrenor.getPrenumeAntrenor());
+            stmt.setString(3, antrenor.getEmailAntrenor());
+            stmt.setString(4, antrenor.getTelefonAntrenor());
+            stmt.setInt(5, antrenor.getIdSectie());
+            stmt.setDouble(6, antrenor.getSalariu());
+            stmt.setInt(7, antrenor.getIdAntrenor());
             stmt.executeUpdate();
         }
     }
@@ -90,5 +92,51 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
         }
         return null; 
     }
-    
+
+    // CORECTAT: Metodă adăugată fiindcă este apelată în Controller
+    public List<Antrenor> cautaDupaNume(String termen) throws SQLException {
+        List<Antrenor> rezultate = new ArrayList<>();
+        String sql = "SELECT * FROM antrenori WHERE nume LIKE ? OR prenume LIKE ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, "%" + termen + "%");
+            stmt.setString(2, "%" + termen + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    rezultate.add(new Antrenor(
+                        rs.getInt("idAntrenor"),
+                        rs.getString("nume"),
+                        rs.getString("prenume"),
+                        rs.getString("email"),
+                        rs.getString("telefon"),
+                        rs.getInt("idSectie"),
+                        rs.getDouble("salariu")
+                    ));
+                }
+            }
+        }
+        return rezultate;
+    }
+
+   
+    public List<Antrenor> filtreazaDupaSectie(int idSectie) throws SQLException {
+        List<Antrenor> rezultate = new ArrayList<>();
+        String sql = "SELECT * FROM antrenori WHERE idSectie = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idSectie);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    rezultate.add(new Antrenor(
+                        rs.getInt("idAntrenor"),
+                        rs.getString("nume"),
+                        rs.getString("prenume"),
+                        rs.getString("email"),
+                        rs.getString("telefon"),
+                        rs.getInt("idSectie"),
+                        rs.getDouble("salariu")
+                    ));
+                }
+            }
+        }
+        return rezultate;
+    }
 }

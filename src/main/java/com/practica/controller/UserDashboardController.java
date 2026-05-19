@@ -73,7 +73,7 @@ public class UserDashboardController {
         AbonamentDAO abonamentDAO = new AbonamentDAO();
         Abonament abonament = abonamentDAO.getById(idAbonament); 
         if (abonament != null) {
-        lblAbonament.setText(abonament.getDenumireAbonament() + " (" + abonament.getPret() + " MDL)");
+        lblAbonament.setText(abonament.getDenumire() + " (" + abonament.getPret() + " MDL)");
             }  else {
     lblAbonament.setText("Fără abonament");
             }

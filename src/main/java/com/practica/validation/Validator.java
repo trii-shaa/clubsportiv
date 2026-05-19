@@ -57,4 +57,9 @@ public class Validator {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'validareDataExpirare'");
     }
+
+    public static void validareSalariu(double salariu) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'validareSalariu'");
+    }
 }

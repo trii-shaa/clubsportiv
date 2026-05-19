@@ -43,14 +43,12 @@ public class AntrenoriController {
     @FXML
     public void initialize() {
         try {
-            antrenorDAO = new AntrenorDAO();
-
             colId.setCellValueFactory(new PropertyValueFactory<>("idAntrenor"));
-            colNume.setCellValueFactory(new PropertyValueFactory<>("nume"));
-            colPrenume.setCellValueFactory(new PropertyValueFactory<>("prenume"));
-            colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-            colTelefon.setCellValueFactory(new PropertyValueFactory<>("telefon"));
-            colSectie.setCellValueFactory(new PropertyValueFactory<>("sectie"));
+            colNume.setCellValueFactory(new PropertyValueFactory<>("numeAntrenor"));
+            colPrenume.setCellValueFactory(new PropertyValueFactory<>("prenumeAntrenor"));
+            colEmail.setCellValueFactory(new PropertyValueFactory<>("emailAntrenor"));
+            colTelefon.setCellValueFactory(new PropertyValueFactory<>("telefonAntrenor"));
+            colSectie.setCellValueFactory(new PropertyValueFactory<>("idSectie"));
             colSalariu.setCellValueFactory(new PropertyValueFactory<>("salariu"));
 
             comboSectie.getItems().addAll(TipSectie.values());
@@ -75,12 +73,17 @@ public class AntrenoriController {
 
     private void completeazaFormular(Antrenor a) {
         txtId.setText(String.valueOf(a.getIdAntrenor()));
-        txtNume.setText(a.getNume());
-        txtPrenume.setText(a.getPrenume());
-        txtEmail.setText(a.getEmail());
-        txtTelefon.setText(a.getTelefon());
+        txtNume.setText(a.getNumeAntrenor());
+        txtPrenume.setText(a.getPrenumeAntrenor());
+        txtEmail.setText(a.getEmailAntrenor());
+        txtTelefon.setText(a.getTelefonAntrenor());
         txtSalariu.setText(String.valueOf(a.getSalariu()));
-        comboSectie.setValue(a.getSectie());
+        
+        if (a.getIdSectie() >= 0 && a.getIdSectie() < TipSectie.values().length) {
+            comboSectie.setValue(TipSectie.values()[a.getIdSectie()]);
+        } else {
+            comboSectie.setValue(null);
+        }
     }
 
     @FXML
@@ -121,7 +124,7 @@ public class AntrenoriController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmare stergere");
         alert.setHeaderText(null);
-        alert.setContentText("Stergi antrenorul " + selectat.getNume() + " " + selectat.getPrenume() + "?");
+        alert.setContentText("Stergi antrenorul " + selectat.getNumeAntrenor() + " " + selectat.getPrenumeAntrenor() + "?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
@@ -151,14 +154,14 @@ public class AntrenoriController {
     }
 
     @FXML
-    public void handleFiltruSectie() {
+  public void handleFiltruSectie() {
         try {
             TipSectie sectie = comboFiltruSectie.getValue();
             if (sectie == null) {
                 incarcaDate();
                 return;
             }
-            List<Antrenor> rezultate = antrenorDAO.filtreazaDupaSectie(sectie.getId());
+            List<Antrenor> rezultate = antrenorDAO.filtreazaDupaSectie(sectie.ordinal());
             tableAntrenori.setItems(FXCollections.observableArrayList(rezultate));
         } catch (Exception e) {
             afiseazaEroare("Eroare la filtrare: " + e.getMessage());
@@ -205,14 +208,13 @@ public class AntrenoriController {
             throw new IllegalArgumentException("Salariul trebuie sa fie un numar!");
         }
         Validator.validareSalariu(salariu);
-
-        return new Antrenor(
+             return new Antrenor(
             Integer.parseInt(txtId.getText()),
             txtNume.getText(),
             txtPrenume.getText(),
             txtEmail.getText(),
             txtTelefon.getText(),
-            comboSectie.getValue(),
+            comboSectie.getValue().ordinal(),
             salariu
         );
     }
@@ -242,5 +244,6 @@ public class AntrenoriController {
         alert.setHeaderText(null);
         alert.setContentText(mesaj);
         alert.showAndWait();
-    }
+    
+}
 }
