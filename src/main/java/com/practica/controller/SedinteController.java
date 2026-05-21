@@ -21,9 +21,10 @@ import java.util.Optional;
 public class SedinteController {
 
     @FXML private TableView<Sedinta> tableSedinte;
+    
     @FXML private TableColumn<Sedinta, Integer> colId;
-    @FXML private TableColumn<Sedinta, String> colData;
-    @FXML private TableColumn<Sedinta, String> colOra;
+    @FXML private TableColumn<Sedinta, LocalDate> colData;
+    @FXML private TableColumn<Sedinta, LocalTime> colOra;
     @FXML private TableColumn<Sedinta, Integer> colIdMembru;
     @FXML private TableColumn<Sedinta, Integer> colIdAntrenor;
 
@@ -43,11 +44,10 @@ public class SedinteController {
             sedintaDAO = new SedintaDAO();
 
             colId.setCellValueFactory(new PropertyValueFactory<>("idSedinta"));
-            colData.setCellValueFactory(new PropertyValueFactory<>("dataSedintei"));
-            colOra.setCellValueFactory(new PropertyValueFactory<>("oraSedintei"));
+            colData.setCellValueFactory(new PropertyValueFactory<>("data"));
+            colOra.setCellValueFactory(new PropertyValueFactory<>("ora"));
             colIdMembru.setCellValueFactory(new PropertyValueFactory<>("idMembru"));
             colIdAntrenor.setCellValueFactory(new PropertyValueFactory<>("idAntrenor"));
-
             incarcaDate();
 
             tableSedinte.getSelectionModel().selectedItemProperty().addListener((obs, old, nou) -> {
@@ -60,6 +60,13 @@ public class SedinteController {
     }
 
     private void incarcaDate() throws Exception {
+        List<Sedinta> dateDinBaza = sedintaDAO.getAll();
+    
+    
+    System.out.println(">>> DEBUG: Am gasit in baza de date " + dateDinBaza.size() + " sedinte.");
+    for (Sedinta s : dateDinBaza) {
+        System.out.println(s);
+    }
         listaSedinte = FXCollections.observableArrayList(sedintaDAO.getAll());
         tableSedinte.setItems(listaSedinte);
     }
@@ -201,11 +208,8 @@ public class SedinteController {
         Integer.parseInt(txtId.getText()),
         dpData.getValue(),
         ora,
-        idAntrenor,
-        "",      
         idMembru,
-        "",      
-        0         
+        idAntrenor    
     );
 }
 

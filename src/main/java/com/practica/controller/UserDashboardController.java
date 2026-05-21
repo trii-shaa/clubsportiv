@@ -36,9 +36,11 @@ public class UserDashboardController {
     @FXML private TextField txtTelefon;
 
     @FXML private TableView<Sedinta> tableSedinte;
-    @FXML private TableColumn<Sedinta, Integer> colIdSedinta;
+
+    @FXML private TableColumn<Sedinta, Integer> colId;
     @FXML private TableColumn<Sedinta, String> colData;
     @FXML private TableColumn<Sedinta, String> colOra;
+    @FXML private TableColumn<Sedinta, Integer> colIdMembru;
     @FXML private TableColumn<Sedinta, Integer> colAntrenor;
 
     private Membru membruCurent;
@@ -51,15 +53,22 @@ public class UserDashboardController {
             membruDAO = new MembriDAO();
             sedintaDAO = new SedintaDAO();
 
-            int idMembru = Sessions.getUtilizatorCurent().getIdMembru();
-            membruCurent = membruDAO.cautaDupaId(idMembru);
-
-            afiseazaProfil();
-            incarcaSedinte();
-
-        } catch (Exception e) {
-            afiseazaEroare("Eroare la incarcarea datelor: " + e.getMessage());
+            if (colId != null) {
+            colId.setCellValueFactory(new PropertyValueFactory<>("idSedinta"));
+        } else {
+            System.out.println("⚠️ AVERTISMENT: colId este null! Verifică dacă în FXML ai fx:id=\"colId\"");
         }
+
+        if (colData != null) colData.setCellValueFactory(new PropertyValueFactory<>("data"));
+        if (colOra != null) colOra.setCellValueFactory(new PropertyValueFactory<>("ora"));
+        if (colAntrenor != null) colAntrenor.setCellValueFactory(new PropertyValueFactory<>("idAntrenor"));
+
+        afiseazaProfil();
+        incarcaSedinte();
+
+    } catch (Exception e) {
+        afiseazaEroare("Eroare la initializare dashboard: " + e.getMessage());
+    }
     }
 
     private String getNumeSectie(int id) {
@@ -96,10 +105,10 @@ public class UserDashboardController {
     }
 
     private void incarcaSedinte() throws Exception {
-        colIdSedinta.setCellValueFactory(new PropertyValueFactory<>("idSedinta"));
-        colData.setCellValueFactory(new PropertyValueFactory<>("dataSedintei"));
-        colOra.setCellValueFactory(new PropertyValueFactory<>("oraSedintei"));
-        colAntrenor.setCellValueFactory(new PropertyValueFactory<>("idAntrenor"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("ID_Sedinta"));
+        colData.setCellValueFactory(new PropertyValueFactory<>("Data_Sedintei"));
+        colOra.setCellValueFactory(new PropertyValueFactory<>("Ora_Sedintei"));
+        colAntrenor.setCellValueFactory(new PropertyValueFactory<>("ID_Antrenor"));
 
         List<Sedinta> sedinte = sedintaDAO.getByMembru(membruCurent.getIdMembru());
         tableSedinte.setItems(FXCollections.observableArrayList(sedinte));
@@ -188,4 +197,56 @@ public class UserDashboardController {
         alert.setContentText(mesaj);
         alert.showAndWait();
     }
+
+    @FXML private TextField txtNouIdSedinta;
+    @FXML private DatePicker dpNouaData;
+    @FXML private TextField txtNouaOra;
+    @FXML private TextField txtIdMembru;
+    @FXML private TextField txtIdAntrenor;
+
+    @FXML
+public void handleAdaugaSedinta() {
+    try {
+        com.practica.validation.Validator.validareCampGol(txtNouIdSedinta.getText(), "ID Ședință");
+        if (dpNouaData.getValue() == null) {
+            throw new IllegalArgumentException("Vă rugăm să selectați o dată!");
+        }
+        com.practica.validation.Validator.validareCampGol(txtNouaOra.getText(), "Ora");
+        com.practica.validation.Validator.validareCampGol(txtIdMembru.getText(), "ID Membru");
+        com.practica.validation.Validator.validareCampGol(txtIdAntrenor.getText(), "ID Antrenor");
+        int idSedinta = Integer.parseInt(txtNouIdSedinta.getText().trim());
+        java.time.LocalDate data = dpNouaData.getValue();
+        java.time.LocalTime ora = java.time.LocalTime.parse(txtNouaOra.getText().trim());
+        int idMembruIntrodus = Integer.parseInt(txtIdMembru.getText().trim());
+        int idAntrenor = Integer.parseInt(txtIdAntrenor.getText().trim());
+        
+        int idMembrucurent = com.practica.sessions.Sessions.getUtilizatorCurent().getIdMembru();
+
+        if (idMembruIntrodus != idMembrucurent) {
+            throw new IllegalArgumentException("Eroare: Nu poți programa ședințe pentru alt membru! ID-ul tău corect este: " + idMembrucurent);
+        }
+
+        Sedinta nouaSedinta = new Sedinta(idSedinta, data, ora, idMembrucurent, idAntrenor);
+        sedintaDAO.add(nouaSedinta);
+        incarcaSedinte();
+
+        txtNouIdSedinta.clear();
+        dpNouaData.setValue(null);
+        txtNouaOra.clear();
+        txtIdMembru.clear();
+        txtIdAntrenor.clear();
+        
+        afiseazaSucces("Ședința a fost programată cu succes!");
+
+    } catch (java.time.format.DateTimeParseException e) {
+        afiseazaEroare("Formatul orei este invalid! Folosiți HH:MM:SS (ex: 15:30:00).");
+    } catch (NumberFormatException e) {
+        afiseazaEroare("ID-ul ședinței și ID-ul antrenorului trebuie să fie numere valide!");
+    } catch (IllegalArgumentException e) {
+        afiseazaEroare(e.getMessage());
+    } catch (Exception e) {
+        afiseazaEroare("Eroare la programare: " + e.getMessage());
+    }
+}
+
 }

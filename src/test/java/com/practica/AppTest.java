@@ -60,9 +60,7 @@ public class AppTest {
             1,
             LocalDate.of(2024, 6, 15),
             LocalTime.of(10, 30),
-            1, "Popescu Ion",
-            1, "Ionescu Maria",
-            1
+            1, 1
         );
 
         admin = new Utilizator(1, "admin", "secret", Rol.ADMIN, null);
@@ -193,10 +191,7 @@ public class AppTest {
         assertEquals(LocalDate.of(2024, 6, 15), sedinta.getData());
         assertEquals(LocalTime.of(10, 30), sedinta.getOra());
         assertEquals(1, sedinta.getIdAntrenor());
-        assertEquals("Popescu Ion", sedinta.getNumeAntrenor());
         assertEquals(1, sedinta.getIdMembru());
-        assertEquals("Ionescu Maria", sedinta.getNumeMembru());
-        assertEquals(1, sedinta.getIdSectie());
     }
 
     @Test
