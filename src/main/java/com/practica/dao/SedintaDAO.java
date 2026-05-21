@@ -102,4 +102,32 @@ public class SedintaDAO extends BaseDAO<Sedinta> {
             rs.getInt("idSectie")
         );
     }
+    
+    public List<Sedinta> filtreazaDupaData(String data) throws SQLException {
+    List<Sedinta> lista = new ArrayList<>();
+    PreparedStatement ps = connection.prepareStatement(
+        "SELECT s.ID_Sedinta, s.Data_Sedintei, s.Ora_Sedintei, " +
+        "s.ID_Antrenor, a.Nume as NumeAntrenor, " +
+        "s.ID_Membru, m.Nume as NumeMembru, m.ID_Sectie " +
+        "FROM Sedinte s " +
+        "JOIN Antrenori a ON s.ID_Antrenor = a.ID_Antrenor " +
+        "JOIN Membri m ON s.ID_Membru = m.ID_Membru " +
+        "WHERE s.Data_Sedintei = ?"
+    );
+    ps.setString(1, data);
+    ResultSet rs = ps.executeQuery();
+    while (rs.next()) {
+        lista.add(new Sedinta(
+            rs.getInt("ID_Sedinta"),
+            rs.getDate("Data_Sedintei").toLocalDate(),
+            rs.getTime("Ora_Sedintei").toLocalTime(),
+            rs.getInt("ID_Antrenor"),
+            rs.getString("NumeAntrenor"),
+            rs.getInt("ID_Membru"),
+            rs.getString("NumeMembru"),
+            rs.getInt("ID_Sectie")
+        ));
+    }
+    return lista;
+}
 }
