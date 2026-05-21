@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +22,8 @@ public class AbonamenteController {
     @FXML private TableColumn<Abonament, Integer> colId;
     @FXML private TableColumn<Abonament, String> colDenumire;
     @FXML private TableColumn<Abonament, String> colDescriere;
-    @FXML private TableColumn<Abonament, String> colDataInceput;
-    @FXML private TableColumn<Abonament, String> colDataExpirarii;
+    @FXML private TableColumn<Abonament, LocalDate> colDataInceput;
+    @FXML private TableColumn<Abonament, LocalDate> colDataExpirarii;
     @FXML private TableColumn<Abonament, Double> colPret;
 
     @FXML private TextField txtId;
@@ -43,6 +44,7 @@ public class AbonamenteController {
 
             colId.setCellValueFactory(new PropertyValueFactory<>("idAbonament"));
             colDenumire.setCellValueFactory(new PropertyValueFactory<>("denumire"));
+            colDescriere.setCellValueFactory(new PropertyValueFactory<>("descriere"));
             colDataInceput.setCellValueFactory(new PropertyValueFactory<>("dataInceput"));
             colDataExpirarii.setCellValueFactory(new PropertyValueFactory<>("dataExpirarii"));
             colPret.setCellValueFactory(new PropertyValueFactory<>("pret"));
@@ -66,6 +68,7 @@ public class AbonamenteController {
     private void completeazaFormular(Abonament a) {
         txtId.setText(String.valueOf(a.getIdAbonament()));
         txtDenumire.setText(a.getDenumire());
+        txtDescriere.setText(a.getDescriere());
         dpDataInceput.setValue(a.getDataInceput());
         dpDataExpirarii.setValue(a.getDataExpirarii());
         txtPret.setText(String.valueOf(a.getPret()));
@@ -126,7 +129,7 @@ public class AbonamenteController {
     @FXML
     public void handleCautare() {
         try {
-            String denumire= txtCautare.getText().trim();
+            String denumire = txtCautare.getText().trim();
             if (denumire.isEmpty()) {
                 incarcaDate();
                 return;
