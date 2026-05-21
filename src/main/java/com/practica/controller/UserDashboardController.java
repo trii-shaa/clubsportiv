@@ -62,12 +62,25 @@ public class UserDashboardController {
         }
     }
 
+    private String getNumeSectie(int id) {
+    switch (id) {
+        case 1: return "Sectia Cardio";
+        case 2: return "Sectia Yoga";
+        case 3: return "Sectia Pilates";
+        case 4: return "Sectia Box";
+        case 5: return "Sectia Inot";
+        case 6: return "Sectia Antrenori Personali";
+        case 7: return "Sectia Fitness";
+        default: return "Sectie necunoscuta";
+    }
+}
+
     private void afiseazaProfil() throws Exception {
-        lblWelcome.setText("Bun venit, " + membruCurent.getIdMembru() + " " + membruCurent.getNumeMembru() + "!");
-        lblNume.setText(membruCurent.getNumeMembru());
-        lblPrenume.setText(membruCurent.getPrenumeMembru());
+        lblWelcome.setText("Bun venit, " + membruCurent.getIdMembru() + " " + membruCurent.getNume() + "!");
+        lblNume.setText(membruCurent.getNume());
+        lblPrenume.setText(membruCurent.getPrenume());
         lblVarsta.setText(String.valueOf(membruCurent.getVarsta()));
-        lblSectie.setText(membruCurent.getNumeSectie());
+        lblSectie.setText(getNumeSectie(membruCurent.getIdSectie()));
 
         int idAbonament = membruCurent.getIdAbonament();
         AbonamentDAO abonamentDAO = new AbonamentDAO();
@@ -78,8 +91,8 @@ public class UserDashboardController {
     lblAbonament.setText("Fără abonament");
             }
 
-        txtEmail.setText(membruCurent.getEmailMembru());
-        txtTelefon.setText(membruCurent.getTelefonMembru());
+        txtEmail.setText(membruCurent.getEmail());
+        txtTelefon.setText(membruCurent.getTelefon());
     }
 
     private void incarcaSedinte() throws Exception {
@@ -102,8 +115,8 @@ public class UserDashboardController {
             Validator.validareTelefon(telefon);
 
             membruDAO.updateDatePersonale(membruCurent.getIdMembru(), email, telefon);
-            membruCurent.setEmailMembru(email);
-            membruCurent.setTelefonMembru(telefon);
+            membruCurent.setEmail(email);
+            membruCurent.setTelefon(telefon);
 
             afiseazaSucces("Datele au fost salvate!");
 

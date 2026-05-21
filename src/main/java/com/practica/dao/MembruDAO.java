@@ -13,11 +13,11 @@ public class MembruDAO extends BaseDAO<Membru> {
     public void add(Membru m) throws SQLException {
      String sql = "INSERT INTO membru (nume, prenume, varsta, email, telefon, idSectie, idAntrenor, idAbonament) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
      PreparedStatement stmt = connection.prepareStatement(sql);
-     stmt.setString(1, m.getNumeMembru());
-     stmt.setString(2, m.getPrenumeMembru());
+     stmt.setString(1, m.getNume());
+     stmt.setString(2, m.getPrenume());
      stmt.setInt(3, m.getVarsta());
-     stmt.setString(4, m.getEmailMembru());
-     stmt.setString(5, m.getTelefonMembru());  
+     stmt.setString(4, m.getEmail());
+     stmt.setString(5, m.getTelefon());  
       stmt.setInt(6, m.getIdSectie());
       stmt.setInt(7, m.getIdAntrenor());
       stmt.setInt(8, m.getIdAbonament());
@@ -29,11 +29,11 @@ public class MembruDAO extends BaseDAO<Membru> {
     public void update(Membru m) throws SQLException {
         String sql = "UPDATE membru SET nume = ?, prenume = ?, varsta = ?, email = ?, telefon = ?, idSectie = ?, idAntrenor = ?, idAbonament = ? WHERE idMembru = ?";
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString(1, m.getNumeMembru());
-        stmt.setString(2, m.getPrenumeMembru());
+        stmt.setString(1, m.getNume());
+        stmt.setString(2, m.getPrenume());
         stmt.setInt(3, m.getVarsta());
-        stmt.setString(4, m.getEmailMembru());
-        stmt.setString(5, m.getTelefonMembru());
+        stmt.setString(4, m.getEmail());
+        stmt.setString(5, m.getTelefon());
         stmt.setInt(6, m.getIdSectie());
         stmt.setInt(7, m.getIdAntrenor());
         stmt.setInt(8, m.getIdAbonament());
@@ -125,4 +125,27 @@ public void updateDatePersonale(int idMembru, String email, String telefon) thro
             stmt.executeUpdate();
         }
     }
+
+    public List<Membru> filtreazaDupaSectie(int idSectie) throws SQLException {
+    List<Membru> lista = new ArrayList<>();
+    PreparedStatement ps = connection.prepareStatement(
+        "SELECT * FROM Membri WHERE ID_Sectie=?"
+    );
+    ps.setInt(1, idSectie);
+    ResultSet rs = ps.executeQuery();
+    while (rs.next()) {
+        lista.add(new Membru(
+            rs.getInt("ID_Membru"),
+            rs.getString("Nume"),
+            rs.getString("Prenume"),
+            rs.getInt("Varsta"),
+            rs.getString("Email"),
+            rs.getString("Telefon"),
+            rs.getInt("ID_Sectie"),
+            rs.getObject("ID_Antrenor") != null ? rs.getInt("ID_Antrenor") : null,
+            rs.getInt("ID_Abonament")
+        ));
+    }
+    return lista;
+}
 }

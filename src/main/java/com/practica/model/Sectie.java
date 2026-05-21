@@ -28,7 +28,7 @@ public class Sectie {
         return capacitateMaxima;
     }
     public String getNumeSectie() {
-        return this.tipSectie != null ? this.tipSectie.getNumeAfisare() : "Fără secție";
+        return this.tipSectie != null ? this.tipSectie.getDenumire() : "Fără secție";
     }
     //Setteri
     public void setIdSectie(int idSectie) {
@@ -43,6 +43,7 @@ public class Sectie {
     public void setCapacitateMaxima(int capacitateMaxima) {
         this.capacitateMaxima = capacitateMaxima;
     }
+    
 
     @Override
     public String toString() {
