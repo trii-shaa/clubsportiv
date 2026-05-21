@@ -1,0 +1,14 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox spacing="20" alignment="CENTER" style="-fx-padding: 40; -fx-background-color: #f0f4f8;" fx:controller="com.practica.controller.LoginController">
+<Label text="🏋️ Club Sportiv" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+<Label text="Autentificare" style="-fx-font-size: 14; -fx-text-fill: #7f8c8d;"/>
+<VBox spacing="12" style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);">
+<Label text="Username:"/>
+<TextField fx:id="txtUsername" promptText="Introdu username-ul"/>
+<Label text="Parola:"/>
+<PasswordField fx:id="txtParola" promptText="Introdu parola"/>
+<Button text="Autentificare" onAction="#handleLogin" maxWidth="Infinity" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14; -fx-padding: 10 0; -fx-background-radius: 5; -fx-cursor: hand;"/>
+</VBox>
+<Label text="Admin: admin / admin123 | Utilizator: alb_ion / pass1001" style="-fx-font-size: 10; -fx-text-fill: #95a5a6;"/>
+</VBox>
