@@ -5,13 +5,13 @@ import java.util.*;
 
 import com.practica.model.Membru;
 
-public class MembruDAO extends BaseDAO<Membru> {
+public class MembriDAO extends BaseDAO<Membru> {
 
-  public MembruDAO() throws SQLException { super(); }
+  public MembriDAO() throws SQLException { super(); }
 
     @Override
     public void add(Membru m) throws SQLException {
-     String sql = "INSERT INTO membru (nume, prenume, varsta, email, telefon, idSectie, idAntrenor, idAbonament) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+     String sql = "INSERT INTO Membri (nume, prenume, varsta, email, telefon, idSectie, idAntrenor, idAbonament) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
      PreparedStatement stmt = connection.prepareStatement(sql);
      stmt.setString(1, m.getNume());
      stmt.setString(2, m.getPrenume());
@@ -27,7 +27,7 @@ public class MembruDAO extends BaseDAO<Membru> {
 
     @Override
     public void update(Membru m) throws SQLException {
-        String sql = "UPDATE membru SET nume = ?, prenume = ?, varsta = ?, email = ?, telefon = ?, idSectie = ?, idAntrenor = ?, idAbonament = ? WHERE idMembru = ?";
+        String sql = "UPDATE Membri SET Nume = ?, Prenume = ?, Varsta = ?, Email = ?, Telefon = ?, ID_Sectie = ?, ID_Antrenor = ?, ID_Abonament = ? WHERE ID_Membru = ?";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, m.getNume());
         stmt.setString(2, m.getPrenume());
@@ -43,7 +43,7 @@ public class MembruDAO extends BaseDAO<Membru> {
 
     @Override
     public void delete(int id) throws SQLException {
-        String sql = "DELETE FROM membru WHERE idMembru = ?";
+        String sql = "DELETE FROM Membri WHERE ID_Membru = ?";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, id);
         stmt.executeUpdate();
@@ -52,7 +52,7 @@ public class MembruDAO extends BaseDAO<Membru> {
     @Override 
     public List<Membru> getAll() throws SQLException {
         List<Membru> lista = new ArrayList<>();
-        ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM membru");
+        ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM Membri");
         while(rs.next()){
             lista.add(new Membru(
                 rs.getInt("ID_Membru"),
@@ -71,7 +71,7 @@ public class MembruDAO extends BaseDAO<Membru> {
 
     public List<Membru> cautaDupaNume(String nume) throws SQLException {
         List<Membru> lista = new ArrayList<>();
-        String sql = "SELECT * FROM membru WHERE nume LIKE ?"; // Corectat numele tabelului din Membri în membru
+        String sql = "SELECT * FROM Membri WHERE Nume LIKE ?"; // Corectat numele tabelului din Membri în membru
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, "%" + nume + "%");
             try (ResultSet rs = ps.executeQuery()) {
@@ -117,7 +117,7 @@ public class MembruDAO extends BaseDAO<Membru> {
 }
 
 public void updateDatePersonale(int idMembru, String email, String telefon) throws SQLException {
-        String sql = "UPDATE membru SET email = ?, telefon = ? WHERE idMembru = ?";
+        String sql = "UPDATE Membri SET Email = ?, Telefon = ? WHERE ID_Membru = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, email);
             stmt.setString(2, telefon);

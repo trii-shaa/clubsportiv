@@ -36,20 +36,22 @@ public class AntrenoriController {
     @FXML private ComboBox<TipSectie> comboSectie;
     @FXML private TextField txtCautare;
     @FXML private ComboBox<TipSectie> comboFiltruSectie;
-
     private AntrenorDAO antrenorDAO;
     private ObservableList<Antrenor> listaAntrenori;
 
     @FXML
     public void initialize() {
         try {
-            colId.setCellValueFactory(new PropertyValueFactory<>("idAntrenor"));
-            colNume.setCellValueFactory(new PropertyValueFactory<>("numeAntrenor"));
-            colPrenume.setCellValueFactory(new PropertyValueFactory<>("prenumeAntrenor"));
-            colEmail.setCellValueFactory(new PropertyValueFactory<>("emailAntrenor"));
-            colTelefon.setCellValueFactory(new PropertyValueFactory<>("telefonAntrenor"));
-            colSectie.setCellValueFactory(new PropertyValueFactory<>("idSectie"));
-            colSalariu.setCellValueFactory(new PropertyValueFactory<>("salariu"));
+
+            this.antrenorDAO = new AntrenorDAO();
+
+            colId.setCellValueFactory(new PropertyValueFactory<>("ID_Antrenor"));
+            colNume.setCellValueFactory(new PropertyValueFactory<>("NumeAntrenor"));
+            colPrenume.setCellValueFactory(new PropertyValueFactory<>("PrenumeAntrenor"));
+            colEmail.setCellValueFactory(new PropertyValueFactory<>("EmailAntrenor"));
+            colTelefon.setCellValueFactory(new PropertyValueFactory<>("TelefonAntrenor"));
+            colSectie.setCellValueFactory(new PropertyValueFactory<>("ID_Sectie"));
+            colSalariu.setCellValueFactory(new PropertyValueFactory<>("Salariu"));
 
             comboSectie.getItems().addAll(TipSectie.values());
             comboFiltruSectie.getItems().add(null);

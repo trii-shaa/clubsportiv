@@ -3,6 +3,7 @@ package com.practica.controller;
 import com.practica.dao.UtilizatorDAO;
 import com.practica.model.Utilizator;
 import com.practica.sessions.Sessions;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,12 +20,15 @@ public class LoginController {
     @FXML private Label         lblEroare;
 
     @FXML
-    public void handleLogin() {
+    public void handleLogin(ActionEvent event) {
+        // Un mesaj scurt în consolă ca să fim 100% siguri că butonul reacționează
+        System.out.println("[DEBUG] Butonul Autentificare a fost apăsat.");
+
         String username = txtUsername.getText().trim();
         String parola   = txtParola.getText().trim();
 
         if (username.isEmpty() || parola.isEmpty()) {
-            setEroare("Completeaza username-ul si parola!");
+            setEroare("Completează username-ul și parola!");
             return;
         }
 
@@ -33,7 +37,7 @@ public class LoginController {
             Utilizator u = dao.login(username, parola);
 
             if (u == null) {
-                setEroare("Username sau parola incorecta!");
+                setEroare("Username sau parolă incorectă!");
                 return;
             }
 
@@ -54,11 +58,18 @@ public class LoginController {
             stage.show();
 
         } catch (Exception e) {
-            setEroare("Eroare: " + e.getMessage());
+            // Printează eroarea completă în terminal (ex: dacă pică conexiunea la MySQL/baza de date)
+            e.printStackTrace(); 
+            setEroare("Eroare sistem: " + e.getMessage());
         }
     }
 
     private void setEroare(String mesaj) {
-        if (lblEroare != null) lblEroare.setText(mesaj);
+        if (lblEroare != null) {
+            lblEroare.setText(mesaj);
+        } else {
+            // Fail-safe în caz că label-ul tot nu e mapat corect în FXML
+            System.out.println("[Eroare Aplicație]: " + mesaj);
+        }
     }
 }

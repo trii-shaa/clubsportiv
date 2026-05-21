@@ -12,7 +12,7 @@ public class SedintaDAO extends BaseDAO<Sedinta> {
 
     @Override
     public void add(Sedinta s) throws SQLException {
-        String sql = "INSERT INTO sedinta (dataSedinta, oraSedinta, idAntrenor, numeAntrenor, idMembru, numeMembru, idSectie) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Sedinte (dataSedinta, oraSedinta, idAntrenor, numeAntrenor, idMembru, numeMembru, idSectie) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setDate(1, java.sql.Date.valueOf(s.getData()));
             stmt.setTime(2, java.sql.Time.valueOf(s.getOra()));
@@ -27,7 +27,7 @@ public class SedintaDAO extends BaseDAO<Sedinta> {
 
     @Override
     public void update(Sedinta s) throws SQLException {
-        String sql = "UPDATE sedinta SET dataSedinta = ?, oraSedinta = ?, idAntrenor = ?, numeAntrenor = ?, idMembru = ?, numeMembru = ?, idSectie = ? WHERE idSedinta = ?";
+        String sql = "UPDATE Sedinte SET Data_Sedinta = ?, Ora_Sedinta = ?, ID_Antrenor = ?, NumeA = ?, ID_Membru = ?, Nume = ?, ID_Sectie = ? WHERE ID_Sedinta = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setDate(1, java.sql.Date.valueOf(s.getData()));
             stmt.setTime(2, java.sql.Time.valueOf(s.getOra()));
@@ -43,7 +43,7 @@ public class SedintaDAO extends BaseDAO<Sedinta> {
 
     @Override
     public void delete(int id) throws SQLException {
-        String sql = "DELETE FROM sedinta WHERE idSedinta = ?";
+        String sql = "DELETE FROM Sedinte WHERE ID_Sedinta = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -53,7 +53,7 @@ public class SedintaDAO extends BaseDAO<Sedinta> {
     @Override
     public List<Sedinta> getAll() throws SQLException {
         List<Sedinta> lista = new ArrayList<>();
-        String sql = "SELECT * FROM sedinta";
+        String sql = "SELECT * FROM Sedinte";
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while(rs.next()){
@@ -64,7 +64,7 @@ public class SedintaDAO extends BaseDAO<Sedinta> {
     }
 
     public Sedinta getById(int id) throws SQLException {
-        String sql = "SELECT * FROM sedinta WHERE idSedinta = ?";
+        String sql = "SELECT * FROM Sedinte WHERE ID_Sedinta = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -78,7 +78,7 @@ public class SedintaDAO extends BaseDAO<Sedinta> {
 
     public List<Sedinta> getByMembru(int idMembru) throws SQLException {
         List<Sedinta> lista = new ArrayList<>();
-        String sql = "SELECT * FROM sedinta WHERE idMembru = ?";
+        String sql = "SELECT * FROM Sedinte WHERE ID_Membru = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, idMembru);
             try (ResultSet rs = stmt.executeQuery()) {

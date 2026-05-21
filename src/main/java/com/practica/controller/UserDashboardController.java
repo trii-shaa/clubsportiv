@@ -1,7 +1,7 @@
 package com.practica.controller;
 
 import com.practica.dao.AbonamentDAO;
-import com.practica.dao.MembruDAO;
+import com.practica.dao.MembriDAO;
 import com.practica.dao.SedintaDAO;
 import com.practica.export.ExportService;
 import com.practica.model.Membru;
@@ -42,13 +42,13 @@ public class UserDashboardController {
     @FXML private TableColumn<Sedinta, Integer> colAntrenor;
 
     private Membru membruCurent;
-    private MembruDAO membruDAO;
+    private MembriDAO membruDAO;
     private SedintaDAO sedintaDAO;
 
     @FXML
     public void initialize() {
         try {
-            membruDAO = new MembruDAO();
+            membruDAO = new MembriDAO();
             sedintaDAO = new SedintaDAO();
 
             int idMembru = Sessions.getUtilizatorCurent().getIdMembru();

@@ -12,7 +12,7 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
     @Override
     public void add(Antrenor antrenor) throws SQLException {
         // CORECTAT: Adăugate toate coloanele corespunzătoare celor 7 parametri
-        String sql = "INSERT INTO antrenori (idAntrenor, nume, prenume, email, telefon, idSectie, salariu) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Antrenori (ID_Antrenor, Nume, Prenume, Email, Telefon, ID_Sectie, Salariu) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, antrenor.getIdAntrenor());
             stmt.setString(2, antrenor.getNumeAntrenor());
@@ -28,18 +28,18 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
     @Override
     public List<Antrenor> getAll() throws SQLException {
         List<Antrenor> antrenori = new ArrayList<>();
-        String sql = "SELECT * FROM antrenori";
+        String sql = "SELECT * FROM Antrenori";
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Antrenor antrenor = new Antrenor(
-                    rs.getInt("idAntrenor"),
-                    rs.getString("nume"),
-                    rs.getString("prenume"),
-                    rs.getString("email"),
-                    rs.getString("telefon"),
-                    rs.getInt("idSectie"),
-                    rs.getDouble("salariu")
+                    rs.getInt("ID_Antrenor"),
+                    rs.getString("Nume"),
+                    rs.getString("Prenume"),
+                    rs.getString("Email"),
+                    rs.getString("Telefon"),
+                    rs.getInt("ID_Sectie"),
+                    rs.getDouble("Salariu")
                 );
                 antrenori.add(antrenor);
             }
@@ -50,7 +50,7 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
     @Override
     public void update(Antrenor antrenor) throws SQLException {
         // CORECTAT: S-a rescris query-ul corect pentru UPDATE
-        String sql = "UPDATE antrenori SET nume = ?, prenume = ?, email = ?, telefon = ?, idSectie = ?, salariu = ? WHERE idAntrenor = ?";
+        String sql = "UPDATE Antrenori SET Nume = ?, Prenume = ?, Email = ?, Telefon = ?, ID_Sectie = ?, Salariu = ? WHERE ID_Antrenor = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, antrenor.getNumeAntrenor());
             stmt.setString(2, antrenor.getPrenumeAntrenor());
@@ -65,7 +65,7 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
 
     @Override
     public void delete(int id) throws SQLException {
-        String sql = "DELETE FROM antrenori WHERE idAntrenor = ?";
+        String sql = "DELETE FROM Antrenori WHERE ID_Antrenor = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -73,19 +73,19 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
     }       
 
     public Antrenor getById(int id) throws SQLException {
-        String sql = "SELECT * FROM antrenori WHERE idAntrenor = ?";
+        String sql = "SELECT * FROM Antrenori WHERE ID_Antrenor = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new Antrenor(
-                        rs.getInt("idAntrenor"),
-                        rs.getString("nume"),
-                        rs.getString("prenume"),
-                        rs.getString("email"),
-                        rs.getString("telefon"),
-                        rs.getInt("idSectie"),
-                        rs.getDouble("salariu")
+                    rs.getInt("ID_Antrenor"),
+                    rs.getString("Nume"),
+                    rs.getString("Prenume"),
+                    rs.getString("Email"),
+                    rs.getString("Telefon"),
+                    rs.getInt("ID_Sectie"),
+                    rs.getDouble("Salariu")
                     );
                 }
             }
@@ -96,20 +96,20 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
     // CORECTAT: Metodă adăugată fiindcă este apelată în Controller
     public List<Antrenor> cautaDupaNume(String termen) throws SQLException {
         List<Antrenor> rezultate = new ArrayList<>();
-        String sql = "SELECT * FROM antrenori WHERE nume LIKE ? OR prenume LIKE ?";
+        String sql = "SELECT * FROM Antrenori WHERE Nume LIKE ? OR Prenume LIKE ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, "%" + termen + "%");
             stmt.setString(2, "%" + termen + "%");
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     rezultate.add(new Antrenor(
-                        rs.getInt("idAntrenor"),
-                        rs.getString("nume"),
-                        rs.getString("prenume"),
-                        rs.getString("email"),
-                        rs.getString("telefon"),
-                        rs.getInt("idSectie"),
-                        rs.getDouble("salariu")
+                    rs.getInt("ID_Antrenor"),
+                    rs.getString("Nume"),
+                    rs.getString("Prenume"),
+                    rs.getString("Email"),
+                    rs.getString("Telefon"),
+                    rs.getInt("ID_Sectie"),
+                    rs.getDouble("Salariu")
                     ));
                 }
             }
@@ -120,19 +120,19 @@ public class AntrenorDAO extends BaseDAO<Antrenor> {
    
     public List<Antrenor> filtreazaDupaSectie(int idSectie) throws SQLException {
         List<Antrenor> rezultate = new ArrayList<>();
-        String sql = "SELECT * FROM antrenori WHERE idSectie = ?";
+        String sql = "SELECT * FROM Antrenori WHERE ID_Sectie = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, idSectie);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     rezultate.add(new Antrenor(
-                        rs.getInt("idAntrenor"),
-                        rs.getString("nume"),
-                        rs.getString("prenume"),
-                        rs.getString("email"),
-                        rs.getString("telefon"),
-                        rs.getInt("idSectie"),
-                        rs.getDouble("salariu")
+                    rs.getInt("ID_Antrenor"),
+                    rs.getString("Nume"),
+                    rs.getString("Prenume"),
+                    rs.getString("Email"),
+                    rs.getString("Telefon"),
+                    rs.getInt("ID_Sectie"),
+                    rs.getDouble("Salariu")
                     ));
                 }
             }

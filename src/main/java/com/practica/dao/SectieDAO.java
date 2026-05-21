@@ -12,7 +12,7 @@ public class SectieDAO extends BaseDAO<Sectie> {
 
     @Override
     public void add(Sectie s) throws SQLException {
-        String sql = "INSERT INTO sectie (numeSectie, descriere, capacitateMaxima) VALUES (?,?,?)";
+        String sql = "INSERT INTO Sectii (numeSectie, descriere, capacitateMaxima) VALUES (?,?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, s.getTipSectie().name());
             stmt.setString(2, s.getDescriere());
@@ -23,7 +23,7 @@ public class SectieDAO extends BaseDAO<Sectie> {
 
     @Override 
     public void update(Sectie s) throws SQLException {
-        String sql = "UPDATE sectie SET numeSectie = ?, descriere = ?, capacitateMaxima = ? WHERE idSectie = ?";
+        String sql = "UPDATE Sectii SET numeSectie = ?, descriere = ?, capacitateMaxima = ? WHERE idSectie = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, s.getTipSectie().name());
             stmt.setString(2, s.getDescriere());
@@ -35,7 +35,7 @@ public class SectieDAO extends BaseDAO<Sectie> {
 
     @Override 
     public void delete(int id) throws SQLException {
-        String sql = "DELETE FROM sectie WHERE idSectie = ?";
+        String sql = "DELETE FROM Sectii WHERE idSectie = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -46,7 +46,7 @@ public class SectieDAO extends BaseDAO<Sectie> {
     public List<Sectie> getAll() throws SQLException {
         List<Sectie> lista = new ArrayList<>();
         try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM sectie")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM Sectii")) {
             while(rs.next()){
                 Sectie s = new Sectie(
                     rs.getInt("ID_Sectie"),
@@ -61,7 +61,7 @@ public class SectieDAO extends BaseDAO<Sectie> {
     }
 
     public Sectie getById(int id) throws SQLException {
-        String sql = "SELECT * FROM sectie WHERE idSectie = ?";
+        String sql = "SELECT * FROM Sectii WHERE ID_Sectie = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -81,7 +81,7 @@ public class SectieDAO extends BaseDAO<Sectie> {
    
     public List<Sectie> cautaDupaDenumire(String denumire) throws SQLException {
         List<Sectie> lista = new ArrayList<>();
-        String sql = "SELECT * FROM sectie WHERE NumeSectie = ?";
+        String sql = "SELECT * FROM Sectii WHERE Denumire = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, denumire);
             try (ResultSet rs = stmt.executeQuery()) {

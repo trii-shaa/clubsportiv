@@ -1,6 +1,6 @@
 package com.practica.controller;
 
-import com.practica.dao.MembruDAO;
+import com.practica.dao.MembriDAO;
 import com.practica.export.ExportService;
 import com.practica.model.Membru;
 import com.practica.validation.Validator;
@@ -44,13 +44,13 @@ public class MembriController {
     private final Map<String, Integer> mapSectii = new LinkedHashMap<>();
     private final Map<String, Integer> mapAbonamente = new LinkedHashMap<>();
 
-    private MembruDAO membruDAO;
+    private MembriDAO membruDAO;
     private ObservableList<Membru> listaMembri;
 
     @FXML
     public void initialize() {
         try {
-            membruDAO = new MembruDAO();
+            membruDAO = new MembriDAO();
 
             colId.setCellValueFactory(new PropertyValueFactory<>("idMembru"));
             colNume.setCellValueFactory(new PropertyValueFactory<>("nume"));
