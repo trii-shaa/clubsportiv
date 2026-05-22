@@ -21,9 +21,6 @@ public class LoginController {
 
     @FXML
     public void handleLogin(ActionEvent event) {
-        // Un mesaj scurt în consolă ca să fim 100% siguri că butonul reacționează
-        System.out.println("[DEBUG] Butonul Autentificare a fost apăsat.");
-
         String username = txtUsername.getText().trim();
         String parola   = txtParola.getText().trim();
 
@@ -38,38 +35,33 @@ public class LoginController {
 
             if (u == null) {
                 setEroare("Username sau parolă incorectă!");
+                txtParola.clear();
+                txtParola.requestFocus();
                 return;
             }
 
             Sessions.setUtilizatorCurent(u);
 
-            String fxml = u.esteAdmin() ? "/fxml/main.fxml" : "/fxml/user_dashboard.fxml";
+            String fxml  = u.esteAdmin() ? "/fxml/main.fxml" : "/fxml/user_dashboard.fxml";
             String titlu = u.esteAdmin() ? "Club Sportiv – Admin" : "Club Sportiv – Profilul meu";
 
             Parent root = FXMLLoader.load(getClass().getResource(fxml));
             Stage stage = (Stage) txtUsername.getScene().getWindow();
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(
-                getClass().getResource("/css/style.css").toExternalForm());
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.setTitle(titlu);
             stage.setMinWidth(900);
             stage.setMinHeight(600);
             stage.show();
 
         } catch (Exception e) {
-            // Printează eroarea completă în terminal (ex: dacă pică conexiunea la MySQL/baza de date)
-            e.printStackTrace(); 
+            e.printStackTrace();
             setEroare("Eroare sistem: " + e.getMessage());
         }
     }
 
     private void setEroare(String mesaj) {
-        if (lblEroare != null) {
-            lblEroare.setText(mesaj);
-        } else {
-            // Fail-safe în caz că label-ul tot nu e mapat corect în FXML
-            System.out.println("[Eroare Aplicație]: " + mesaj);
-        }
+        lblEroare.setText(mesaj);
+        lblEroare.setVisible(true);
+        lblEroare.setManaged(true);
     }
 }

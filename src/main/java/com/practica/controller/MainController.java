@@ -28,7 +28,7 @@ public class MainController {
     @FXML public void deschideMembri()      { deschide("/fxml/admin_membri.fxml",      "Membri"); }
     @FXML public void deschideAntrenori()   { deschide("/fxml/antrenori.fxml",          "Antrenori"); }
     @FXML public void deschideSedinte()     { deschide("/fxml/sedinte.fxml",            "Sedinte"); }
-    @FXML public void deschideAbonamente()  { deschide("/fxml/abonamente.fxml",         "Abonamente"); }
+    @FXML public void deschideAbonamente()  { deschide("/fxml/admin_abonamente.fxml",         "Abonamente"); }
     @FXML public void deschideRapoarte()    { deschide("/fxml/rapoarte.fxml",           "Rapoarte"); }
     @FXML public void deschideUtilizatori() { deschide("/fxml/admin_utilizatori.fxml",  "Utilizatori"); }
 
@@ -45,9 +45,11 @@ public class MainController {
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,
-                "Nu s-a putut deschide fereastra: " + e.getMessage())
-                .showAndWait();
+            Throwable cause = e.getCause() != null ? e.getCause() : e;
+        new Alert(Alert.AlertType.ERROR,
+            "Nu s-a putut deschide fereastra:\n" + cause.getClass().getName() + "\n" + cause.getMessage())
+            .showAndWait();
+        e.printStackTrace();
         }
     }
 

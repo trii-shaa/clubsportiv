@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="20" alignment="CENTER" 
-      style="-fx-padding: 40; -fx-background-color: #f0f4f8;" 
-      xmlns="http://javafx.com/javafx/21" 
-      xmlns:fx="http://javafx.com/fxml/1" 
-      fx:controller="com.practica.controller.LoginController">
-      
-    <Label text="🏋️ Club Sportiv" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
-    <Label text="Autentificare" style="-fx-font-size: 14; -fx-text-fill: #7f8c8d;"/>
-    
-    <VBox spacing="12" style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);">
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.practica.controller.LoginController"
+      spacing="20" alignment="CENTER"
+      style="-fx-padding: 40; -fx-background-color: #f0f4f8;">
+
+    <Label text="🏋️ Club Sportiv"
+           style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, #7b4cc5, 18, 0.4, 0, 0);"/>
+    <Label text="Autentificare"
+           style="-fx-font-size: 13; -fx-text-fill: #bf7a8d; -fx-font-style: italic;"/>
+
+    <VBox spacing="12"
+          style="-fx-background-color: rgba(41,36,62,0.75); -fx-background-radius: 20; -fx-border-color: rgba(123,76,197,0.45); -fx-border-width: 1.5; -fx-border-radius: 20; -fx-padding: 32 30; -fx-effect: dropshadow(gaussian, rgba(17,18,29,0.8), 30, 0, 0, 10);">
         <Label text="Username:"/>
-        <TextField fx:id="txtUsername" promptText="Introdu username-ul"/>
-        
+        <TextField fx:id="txtUsername" promptText="Introdu username-ul" style="-fx-background-color: rgba(63,69,138,0.28); -fx-background-radius: 10; -fx-border-color: rgba(123,76,197,0.4); -fx-border-radius: 10; -fx-border-width: 1; -fx-text-fill: white; -fx-prompt-text-fill: rgba(201,194,224,0.45); -fx-padding: 10 14; -fx-font-size: 13;"/>
         <Label text="Parola:"/>
-        <PasswordField fx:id="txtParola" promptText="Introdu parola"/>
-        
-        <Button text="Autentificare" onAction="#handleLogin" maxWidth="Infinity" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14; -fx-padding: 10 0; -fx-background-radius: 5; -fx-cursor: hand;"/>
+        <PasswordField fx:id="txtParola" promptText="Introdu parola" style="-fx-background-color: rgba(63,69,138,0.28); -fx-background-radius: 10; -fx-border-color: rgba(123,76,197,0.4); -fx-border-radius: 10; -fx-border-width: 1; -fx-text-fill: white; -fx-prompt-text-fill: rgba(201,194,224,0.45); -fx-padding: 10 14; -fx-font-size: 13;"/>
+        <Button text="Autentificare" onAction="#handleLogin" maxWidth="Infinity"
+                style="-fx-background-color: linear-gradient(to right, #7b4cc5, #3f458a); -fx-background-radius: 10; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-padding: 12 0; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, #7b4cc5, 12, 0.3, 0, 3);"/>
+        <Label fx:id="lblEroare" text="" wrapText="true" visible="false" managed="false"
+               style="-fx-text-fill: #c0392b; -fx-font-weight: bold; -fx-font-size: 12;
+                      -fx-background-color: rgba(41,36,62,0.75); -fx-background-radius: 5;
+                      -fx-border-color: #e74c3c; -fx-border-radius: 5; -fx-border-width: 1;
+                      -fx-padding: 8 12;"/>
     </VBox>
-    
-    <Label text="Admin: admin / admin123 | Utilizator: alb_ion / pass1001" style="-fx-font-size: 10; -fx-text-fill: #95a5a6;"/>
+
+    <Label text="Admin: admin / admin123 | Utilizator: alb_ion / pass1001"
+           style="-fx-font-size: 10; -fx-text-fill: #95a5a6;"/>
 </VBox>
