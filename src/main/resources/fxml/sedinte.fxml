@@ -8,18 +8,18 @@
                      -fx-border-color: rgba(123,76,197,0.3); -fx-border-width: 0 0 1 0;
                      -fx-padding: 12 24;"
               alignment="CENTER_LEFT" spacing="12">
-            <Label text="ðŸ“…  Gestionare Sedinte"
+            <Label text="Gestionare Sedinte"
                    style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: white;"/>
             <Region HBox.hgrow="ALWAYS"/>
             <Label text="Data:" style="-fx-text-fill: rgba(201,194,224,0.8); -fx-font-size: 12;"/>
             <DatePicker fx:id="dpFiltruData" promptText="Selecteaza data..." prefWidth="160"
                         style="-fx-background-color: rgba(41,36,62,0.7); -fx-background-radius: 8;
                                -fx-border-color: rgba(123,76,197,0.4); -fx-border-radius: 8; -fx-border-width: 1;"/>
-            <Button text="ðŸ” Filtreaza" onAction="#handleFiltruData"
+            <Button text="Filtreaza" onAction="#handleFiltruData"
                     style="-fx-background-color: rgba(63,69,138,0.6); -fx-background-radius: 8;
                            -fx-border-color: rgba(63,69,138,0.9); -fx-border-radius: 8; -fx-border-width: 1;
                            -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 7 14;"/>
-            <Button text="â†º Reset" onAction="#handleResetFiltru"
+            <Button text="Reset" onAction="#handleResetFiltru"
                     style="-fx-background-color: rgba(41,36,62,0.5); -fx-background-radius: 8;
                            -fx-border-color: rgba(123,76,197,0.3); -fx-border-radius: 8; -fx-border-width: 1;
                            -fx-text-fill: rgba(201,194,224,0.8); -fx-cursor: hand; -fx-padding: 7 14;"/>

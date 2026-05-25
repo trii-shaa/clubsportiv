@@ -8,7 +8,7 @@
                      -fx-border-color: rgba(123,76,197,0.3); -fx-border-width: 0 0 1 0;
                      -fx-padding: 12 24;"
               alignment="CENTER_LEFT">
-            <Label text="���  Rapoarte"
+            <Label text="Rapoarte"
                    style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: white;"/>
         </HBox>
     </top>
@@ -16,8 +16,7 @@
         <TabPane tabClosingPolicy="UNAVAILABLE"
                  style="-fx-background-color: #11121d; -fx-tab-min-width: 180;
                         -fx-padding: 10;">
-            <!-- Tab 1 -->
-            <Tab text="�� Antrenori peste medie">
+            <Tab text="Antrenori peste medie">
                 <VBox spacing="14"
                       style="-fx-padding: 24; -fx-background-color: #11121d;">
                     <Label text="Antrenori cu salariul peste media clubului"
@@ -36,19 +35,18 @@
                         </placeholder>
                     </TableView>
                     <HBox spacing="10">
-                        <Button text="��� Reincarca" onAction="#incarcaRaport1"
+                        <Button text="Reincarca" onAction="#incarcaRaport1"
                                 style="-fx-background-color: rgba(41,36,62,0.6); -fx-background-radius: 8;
                                        -fx-border-color: rgba(123,76,197,0.4); -fx-border-radius: 8; -fx-border-width: 1;
                                        -fx-text-fill: #c9c2e0; -fx-cursor: hand; -fx-padding: 8 18;"/>
-                        <Button text="��� Exporta CSV / TXT" onAction="#exportRaport1"
+                        <Button text="Exporta CSV / TXT" onAction="#exportRaport1"
                                 style="-fx-background-color: rgba(63,138,100,0.35); -fx-background-radius: 8;
                                        -fx-border-color: rgba(39,174,96,0.7); -fx-border-radius: 8; -fx-border-width: 1;
                                        -fx-text-fill: #7dffb3; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 8 18;"/>
                     </HBox>
                 </VBox>
             </Tab>
-            <!-- Tab 2 -->
-            <Tab text="��� Membri per sectie">
+            <Tab text="Membri per sectie">
                 <VBox spacing="14"
                       style="-fx-padding: 24; -fx-background-color: #11121d;">
                     <Label text="Numarul de membri inscrisi in fiecare sectie"
@@ -66,19 +64,18 @@
                         </placeholder>
                     </TableView>
                     <HBox spacing="10">
-                        <Button text="��� Reincarca" onAction="#incarcaRaport2"
+                        <Button text="Reincarca" onAction="#incarcaRaport2"
                                 style="-fx-background-color: rgba(41,36,62,0.6); -fx-background-radius: 8;
                                        -fx-border-color: rgba(123,76,197,0.4); -fx-border-radius: 8; -fx-border-width: 1;
                                        -fx-text-fill: #c9c2e0; -fx-cursor: hand; -fx-padding: 8 18;"/>
-                        <Button text="��� Exporta CSV / TXT" onAction="#exportRaport2"
+                        <Button text="Exporta CSV / TXT" onAction="#exportRaport2"
                                 style="-fx-background-color: rgba(63,138,100,0.35); -fx-background-radius: 8;
                                        -fx-border-color: rgba(39,174,96,0.7); -fx-border-radius: 8; -fx-border-width: 1;
                                        -fx-text-fill: #7dffb3; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 8 18;"/>
                     </HBox>
                 </VBox>
             </Tab>
-            <!-- Tab 3 -->
-            <Tab text="��� Sedinte ultima saptamana">
+            <Tab text="Sedinte ultima saptamana">
                 <VBox spacing="14"
                       style="-fx-padding: 24; -fx-background-color: #11121d;">
                     <Label text="Sedintele desfasurate in ultimele 7 zile"
@@ -100,11 +97,11 @@
                         </placeholder>
                     </TableView>
                     <HBox spacing="10">
-                        <Button text="��� Reincarca" onAction="#incarcaRaport3"
+                        <Button text="Reincarca" onAction="#incarcaRaport3"
                                 style="-fx-background-color: rgba(41,36,62,0.6); -fx-background-radius: 8;
                                        -fx-border-color: rgba(123,76,197,0.4); -fx-border-radius: 8; -fx-border-width: 1;
                                        -fx-text-fill: #c9c2e0; -fx-cursor: hand; -fx-padding: 8 18;"/>
-                        <Button text="��� Exporta CSV / TXT" onAction="#exportRaport3"
+                        <Button text="Exporta CSV / TXT" onAction="#exportRaport3"
                                 style="-fx-background-color: rgba(63,138,100,0.35); -fx-background-radius: 8;
                                        -fx-border-color: rgba(39,174,96,0.7); -fx-border-radius: 8; -fx-border-width: 1;
                                        -fx-text-fill: #7dffb3; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 8 18;"/>

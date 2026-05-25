@@ -11,7 +11,7 @@ public class MembriDAO extends BaseDAO<Membru> {
 
     @Override
     public void add(Membru m) throws SQLException {
-     String sql = "INSERT INTO Membri (nume, prenume, varsta, email, telefon, idSectie, idAntrenor, idAbonament) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+     String sql = "INSERT INTO Membri (Nume, Prenume, Varsta, Email, Telefon, ID_Sectie, ID_Antrenor, ID_Abonament) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
      PreparedStatement stmt = connection.prepareStatement(sql);
      stmt.setString(1, m.getNume());
      stmt.setString(2, m.getPrenume());

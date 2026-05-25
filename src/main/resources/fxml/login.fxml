@@ -7,7 +7,7 @@
       spacing="20" alignment="CENTER"
       style="-fx-padding: 40; -fx-background-color: #f0f4f8;">
 
-    <Label text="🏋️ Club Sportiv"
+    <Label text="Club Sportiv"
            style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, #7b4cc5, 18, 0.4, 0, 0);"/>
     <Label text="Autentificare"
            style="-fx-font-size: 13; -fx-text-fill: #bf7a8d; -fx-font-style: italic;"/>
